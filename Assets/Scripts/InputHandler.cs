@@ -14,6 +14,7 @@ public class InputHandler : MonoBehaviour
     public LayerMask interactableLayer = new LayerMask();
     bool isGamePause = false;
     public GameObject pausePanel;
+    public bool isBuildingProcess = false;
 
     List<Transform>[] hotkey = new List<Transform>[10];
 
@@ -42,124 +43,127 @@ public class InputHandler : MonoBehaviour
 
         if (!isGamePause)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (!isBuildingProcess)
             {
-                if (EventSystem.current.IsPointerOverGameObject())
+                if (Input.GetMouseButtonDown(0))
                 {
-                    return;
-                }
-                mousePosition = Input.mousePosition;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //get camera from somewhere else (from variable)
-                if (Physics.Raycast(ray, out hit, 1000, interactableLayer))
-                {
-                    if (AddedUnit(hit.transform, Input.GetKey(KeyCode.LeftControl)))
+                    if (EventSystem.current.IsPointerOverGameObject())
                     {
-                        //be able to do stuff with units
+                        return;
                     }
-                    else if (AddedBuilding(hit.transform))
+                    mousePosition = Input.mousePosition;
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //get camera from somewhere else (from variable)
+                    if (Physics.Raycast(ray, out hit, 1000, interactableLayer))
                     {
-                        //be able to do stuff with bullding
-                    }
-                }
-                else
-                {
-                    isDragging = true;
-                    DeselectUnits();
-                }
-            }
-
-            if (Input.GetMouseButtonUp(0))
-            {
-                foreach (Transform child in PlayerManager.instance.playerUnits)
-                {
-                    foreach (Transform unit in child)
-                    {
-                        if (IsWithinSelectionBounds(unit))
+                        if (AddedUnit(hit.transform, Input.GetKey(KeyCode.LeftControl)))
                         {
-                            AddedUnit(unit, true);
+                            //be able to do stuff with units
+                        }
+                        else if (AddedBuilding(hit.transform))
+                        {
+                            //be able to do stuff with bullding
                         }
                     }
-                }
-                isDragging = false;
-            }
-
-            if (Input.GetMouseButtonDown(1) && HaveSelectedUnits())
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //get camera from somewhere else (from variable)
-                if (Physics.Raycast(ray, out hit))
-                {
-                    //FIND BETTER SOLUTION
-                    foreach (Transform unit in selectedUnits)
+                    else
                     {
-                        PlayerUnit playerUnit = unit.gameObject.GetComponent<PlayerUnit>();
-                        if (playerUnit.unitType.unitType == BasicUnit.UnitType.Worker)
-                        {
-                            playerUnit.GetComponent<Worker>().HandleWorking(false);
-                        }
+                        isDragging = true;
+                        DeselectUnits();
                     }
-                    //
-                    LayerMask layerHit = hit.transform.gameObject.layer;
-                    switch (layerHit.value)
+                }
+
+                if (Input.GetMouseButtonUp(0))
+                {
+                    foreach (Transform child in PlayerManager.instance.playerUnits)
                     {
-                        case 8://Units layer
-                               //do something
-                            break;
-                        case 9://Enemy units layer
-                            foreach (Transform unit in selectedUnits)
+                        foreach (Transform unit in child)
+                        {
+                            if (IsWithinSelectionBounds(unit))
                             {
-                                PlayerUnit playerUnit = unit.gameObject.GetComponent<PlayerUnit>();
-                                playerUnit.SetEnemyTarget(hit.transform);
+                                AddedUnit(unit, true);
                             }
-                            break;
-                        case 10:
-                            //gather resources
-                            foreach (Transform unit in selectedUnits)
+                        }
+                    }
+                    isDragging = false;
+                }
+
+                if (Input.GetMouseButtonDown(1) && HaveSelectedUnits())
+                {
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //get camera from somewhere else (from variable)
+                    if (Physics.Raycast(ray, out hit))
+                    {
+                        //FIND BETTER SOLUTION
+                        foreach (Transform unit in selectedUnits)
+                        {
+                            PlayerUnit playerUnit = unit.gameObject.GetComponent<PlayerUnit>();
+                            if (playerUnit.unitType.unitType == BasicUnit.UnitType.Worker)
                             {
-                                PlayerUnit playerUnit = unit.gameObject.GetComponent<PlayerUnit>();
-                                if (playerUnit.unitType.unitType == BasicUnit.UnitType.Worker)
+                                playerUnit.GetComponent<Worker>().HandleWorking(false);
+                            }
+                        }
+                        //
+                        LayerMask layerHit = hit.transform.gameObject.layer;
+                        switch (layerHit.value)
+                        {
+                            case 8://Units layer
+                                   //do something
+                                break;
+                            case 9://Enemy units layer
+                                foreach (Transform unit in selectedUnits)
                                 {
-                                    playerUnit.GetComponent<Worker>().HandleWorking(true, hit.transform);
+                                    PlayerUnit playerUnit = unit.gameObject.GetComponent<PlayerUnit>();
+                                    playerUnit.SetEnemyTarget(hit.transform);
                                 }
-                            }
-                            break;
-                        default:
-                            foreach (Transform unit in selectedUnits)
-                            {
-                                PlayerUnit playerUnit = unit.gameObject.GetComponent<PlayerUnit>();
-                                playerUnit.hasAggro = false;
-                                playerUnit.MoveUnit(hit.point);
-                            }
-                            break;
+                                break;
+                            case 10:
+                                //gather resources
+                                foreach (Transform unit in selectedUnits)
+                                {
+                                    PlayerUnit playerUnit = unit.gameObject.GetComponent<PlayerUnit>();
+                                    if (playerUnit.unitType.unitType == BasicUnit.UnitType.Worker)
+                                    {
+                                        playerUnit.GetComponent<Worker>().HandleWorking(true, hit.transform);
+                                    }
+                                }
+                                break;
+                            default:
+                                foreach (Transform unit in selectedUnits)
+                                {
+                                    PlayerUnit playerUnit = unit.gameObject.GetComponent<PlayerUnit>();
+                                    playerUnit.hasAggro = false;
+                                    playerUnit.MoveUnit(hit.point);
+                                }
+                                break;
+                        }
                     }
                 }
-            }
-            else if (Input.GetMouseButtonDown(1) && selectedBuilding != null)
-            {
-                selectedBuilding.gameObject.GetComponent<IBuilding>().SetSpawnMarkerLocation();
-            }
-
-            #region Hotkeys
-            if (Input.inputString != "")
-            {
-                int number; //set default value -1
-                bool isNumber = int.TryParse(Input.inputString, out number);
-                if (isNumber && number >= 0 && number <= 9)
+                else if (Input.GetMouseButtonDown(1) && selectedBuilding != null)
                 {
-                    if (Input.GetKey(number.ToString()) && Input.GetKey(KeyCode.Q)) //Q -> LeftControl
+                    selectedBuilding.gameObject.GetComponent<IBuilding>().SetSpawnMarkerLocation();
+                }
+
+                #region Hotkeys
+                if (Input.inputString != "")
+                {
+                    int number; //set default value -1
+                    bool isNumber = int.TryParse(Input.inputString, out number);
+                    if (isNumber && number >= 0 && number <= 9)
                     {
-                        AddHotkeyUnits(number);
-                    }
-                    else if (Input.GetKey(number.ToString()) && Input.GetKey(KeyCode.E)) //E -> LeftShift
-                    {
-                        RemoveHotkeyUnits(number);
-                    }
-                    else if (Input.GetKeyDown(number.ToString()))
-                    {
-                        SelectHotkeyUnits(number);
+                        if (Input.GetKey(number.ToString()) && Input.GetKey(KeyCode.Q)) //Q -> LeftControl
+                        {
+                            AddHotkeyUnits(number);
+                        }
+                        else if (Input.GetKey(number.ToString()) && Input.GetKey(KeyCode.E)) //E -> LeftShift
+                        {
+                            RemoveHotkeyUnits(number);
+                        }
+                        else if (Input.GetKeyDown(number.ToString()))
+                        {
+                            SelectHotkeyUnits(number);
+                        }
                     }
                 }
+                #endregion
             }
-            #endregion
         }
     }
 

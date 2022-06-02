@@ -6,10 +6,13 @@ public class Blueprint : MonoBehaviour
 {
     RaycastHit hit;
     public GameObject prefab;
+    BuildingPlacement buildingPlacement;
 
     void Start()
     {
+        buildingPlacement = GetComponent<BuildingPlacement>();
         StickBlueprintToMouse();
+        InputHandler.instance.isBuildingProcess = true;
     }
 
     void Update()
@@ -18,9 +21,22 @@ public class Blueprint : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            Vector3 position = new Vector3(transform.position.x, prefab.transform.position.y, transform.position.z);
-            GameObject building = Instantiate(prefab, position, transform.rotation);
-            ActionFrame.instance.SetBuildingParent(building);
+            if (CanPlaceBuilding())
+            {
+                Vector3 position = new Vector3(transform.position.x, prefab.transform.position.y, transform.position.z);
+                GameObject building = Instantiate(prefab, position, transform.rotation);
+                ActionFrame.instance.SetBuildingParent(building);
+                InputHandler.instance.isBuildingProcess = false;
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.Log("Invalid location!");
+            }
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            InputHandler.instance.isBuildingProcess = false;
             Destroy(gameObject);
         }
     }
@@ -33,5 +49,12 @@ public class Blueprint : MonoBehaviour
         {
             transform.position = new Vector3(hit.point.x, prefab.transform.position.y, hit.point.z);
         }
+    }
+
+    bool CanPlaceBuilding()
+    {
+        if (buildingPlacement.colliders.Count > 0)
+            return false;
+        return true;
     }
 }

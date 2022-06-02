@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 582336110855228719}
   - component: {fileID: 6357584811023461625}
   - component: {fileID: 5958252888464109944}
+  - component: {fileID: -1333195437190222401}
   m_Layer: 0
   m_Name: BarracksBlueprint
   m_TagString: Building
@@ -91,7 +92,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3020755611309798252}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -109,3 +110,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 3020755611309798252, guid: 6a24ce5a897ef8747b8df12f6b0450fa, type: 3}
+--- !u!114 &-1333195437190222401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3020755611309798252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06cd14e08aab314989b4a6c44389269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliders: []
+  tags:
+  - Interactables
+  - EnemyUnits
+  - Resource
