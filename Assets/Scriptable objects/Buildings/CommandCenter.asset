@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7d9c6fab88515d47a559d6e5bb7db95, type: 3}
+  m_Name: CommandCenter
+  m_EditorClassIdentifier: 
+  buildingType: 0
+  buildingName: Command Center
+  buildingPrefab: {fileID: 3020755611309798252, guid: 6b8d37f5d60457349b811a0ac0280e05, type: 3}
+  buildingBlueprintPrefab: {fileID: 3020755611309798252, guid: cba294495921f3c418042b530fde5141, type: 3}
+  icon: {fileID: 4033467251304240107, guid: 3b632d805be723a48abe7ebd3fa11e08, type: 3}
+  spawnTime: 30
+  spawnLocation: {x: 0, y: 0.5, z: -1.5}
+  baseStats:
+    health: 1000
+    armor: 1
+    cost: 500

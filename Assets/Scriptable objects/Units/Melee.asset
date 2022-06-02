@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158aa723c88470a489059edfe25e4c04, type: 3}
+  m_Name: Melee
+  m_EditorClassIdentifier: 
+  unitName: Melee
+  cubePrefab: {fileID: 5852132777919239718, guid: e6869d601b7450f4aae3184cc0354f5f, type: 3}
+  spherePrefab: {fileID: 5848977642554299309, guid: ed620f3280c41474f916383108d83a25, type: 3}
+  icon: {fileID: 4033467251304240107, guid: 3b632d805be723a48abe7ebd3fa11e08, type: 3}
+  unitType: 1
+  spawnTime: 5
+  baseStats:
+    health: 50
+    armor: 1
+    movementSpeed: 1.5
+    damage: 12
+    attackSpeed: 1
+    attackRange: 1
+    aggroRange: 3
+    energy: 0
+    cost: 50

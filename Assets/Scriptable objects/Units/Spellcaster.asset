@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 158aa723c88470a489059edfe25e4c04, type: 3}
+  m_Name: Spellcaster
+  m_EditorClassIdentifier: 
+  unitName: Spellcaster
+  cubePrefab: {fileID: 5852132777919239718, guid: 2e018ab8e6112714dbe7bc996c4dd817, type: 3}
+  spherePrefab: {fileID: 5848977642554299309, guid: 225f80edc2d8c5e4eaa6359923f27b3f, type: 3}
+  icon: {fileID: 4033467251304240107, guid: 3b632d805be723a48abe7ebd3fa11e08, type: 3}
+  unitType: 4
+  spawnTime: 7
+  baseStats:
+    health: 25
+    armor: 0
+    movementSpeed: 1.5
+    damage: 5
+    attackSpeed: 1
+    attackRange: 2
+    aggroRange: 4
+    energy: 50
+    cost: 75
