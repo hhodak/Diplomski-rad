@@ -8,7 +8,8 @@ public class BuildingPlacement : MonoBehaviour
     public List<string> blockingTags = new List<string>(){
         "Unit",
         "Building",
-        "Resource"
+        "Resource",
+        "Environment"
         };
 
     private void OnTriggerEnter(Collider other)

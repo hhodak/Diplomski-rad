@@ -110,6 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 3020755611309798252, guid: 6b8d37f5d60457349b811a0ac0280e05, type: 3}
+  blueprintMaterial: {fileID: 2100000, guid: 75464113549ba554c85d554d22866f37, type: 2}
+  blueprintInvalidMaterial: {fileID: 2100000, guid: ce7a783de28d0bd4cb2d3f7a517934f0, type: 2}
 --- !u!114 &4388304095849019018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colliders: []
-  tags:
-  - Interactables
-  - EnemyUnits
+  blockingTags:
+  - Unit
+  - Building
   - Resource

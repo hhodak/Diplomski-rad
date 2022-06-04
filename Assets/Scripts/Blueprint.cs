@@ -6,6 +6,8 @@ public class Blueprint : MonoBehaviour
 {
     RaycastHit hit;
     public GameObject prefab;
+    public Material blueprintMaterial;
+    public Material blueprintInvalidMaterial;
     BuildingPlacement buildingPlacement;
 
     void Start()
@@ -18,6 +20,15 @@ public class Blueprint : MonoBehaviour
     void Update()
     {
         StickBlueprintToMouse();
+
+        if (CanPlaceBuilding())
+        {
+            SetBlueprintMaterial(blueprintMaterial);
+        }
+        else
+        {
+            SetBlueprintMaterial(blueprintInvalidMaterial);
+        }
 
         if (Input.GetMouseButton(0))
         {
@@ -56,5 +67,10 @@ public class Blueprint : MonoBehaviour
         if (buildingPlacement.colliders.Count > 0)
             return false;
         return true;
+    }
+
+    void SetBlueprintMaterial(Material material)
+    {
+        GetComponent<Renderer>().material = material;
     }
 }
