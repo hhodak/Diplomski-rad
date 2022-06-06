@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        InputHandler.instance.HandleUnitMovement();
+        InputHandler.instance.HandleUserInput();
     }
 
     public void SetBasicStats(Transform type)

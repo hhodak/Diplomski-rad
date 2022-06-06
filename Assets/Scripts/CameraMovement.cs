@@ -6,20 +6,10 @@ public class CameraMovement : MonoBehaviour
 {
     float speed = 0.05f;
     float zoomSpeed = 10f;
-    float rotationSpeed = 0.2f;
-
+    float rotationSpeedX = 1.5f;
+    float rotationSpeedY = -2.0f;
     float minHeight = 2f;
     float maxHeight = 20f;
-
-    Vector3 pos1;
-    Vector3 pos2;
-
-    Transform cameraChild;
-
-    void Start()
-    {
-        cameraChild = transform.GetChild(0);
-    }
 
     void Update()
     {
@@ -71,19 +61,12 @@ public class CameraMovement : MonoBehaviour
 
     void GetCameraRotation()
     {
-        if (Input.GetMouseButtonDown(2))
-        {
-            pos1 = Input.mousePosition;
-        }
-
         if (Input.GetMouseButton(2))
         {
-            pos2 = Input.mousePosition;
-            float dx = (pos2 - pos1).x * rotationSpeed;
-            float dy = (pos2 - pos1).y * rotationSpeed;
-            transform.rotation *= Quaternion.Euler(new Vector3(0, dx, 0));
-            cameraChild.transform.rotation *= Quaternion.Euler(new Vector3(-dy, 0, 0));
-            pos1 = pos2;
+            float y = Input.GetAxis("Mouse X");
+            float x = Input.GetAxis("Mouse Y");
+            Vector3 rotateValue = new Vector3(x * rotationSpeedX, y * rotationSpeedY, 0);
+            transform.eulerAngles -= rotateValue;
         }
     }
 }

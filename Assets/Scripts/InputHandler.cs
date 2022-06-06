@@ -34,7 +34,7 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    public void HandleUnitMovement()
+    public void HandleUserInput()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
