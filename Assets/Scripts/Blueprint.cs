@@ -9,10 +9,12 @@ public class Blueprint : MonoBehaviour
     public Material blueprintMaterial;
     public Material blueprintInvalidMaterial;
     BuildingPlacement buildingPlacement;
+    Renderer renderer;
 
     void Start()
     {
         buildingPlacement = GetComponent<BuildingPlacement>();
+        renderer = GetComponent<Renderer>();
         StickBlueprintToMouse();
         InputHandler.instance.isBuildingProcess = true;
     }
@@ -71,6 +73,6 @@ public class Blueprint : MonoBehaviour
 
     void SetBlueprintMaterial(Material material)
     {
-        GetComponent<Renderer>().material = material;
+        renderer.material = material;
     }
 }

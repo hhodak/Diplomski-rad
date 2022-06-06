@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BuildingPlacement : MonoBehaviour
 {
+    [HideInInspector]
     public List<Collider> colliders = new List<Collider>();
-    public List<string> blockingTags = new List<string>(){
+    private readonly List<string> blockingTags = new List<string>(){
         "Unit",
         "Building",
         "Resource",
