@@ -44,7 +44,7 @@ public class Blueprint : MonoBehaviour
             }
             else
             {
-                Debug.Log("Invalid location!");
+                StartCoroutine(LogController.instance.ShowMessage("Invalid location!"));
             }
         }
         if (Input.GetMouseButtonDown(1))

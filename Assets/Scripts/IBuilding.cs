@@ -35,7 +35,7 @@ public class IBuilding : Interactable
             }
             else
             {
-                Debug.Log("Invalid location! You can place spawn marker on empty ground.");
+                StartCoroutine(LogController.instance.ShowMessage("Invalid location! You can place spawn marker on empty ground."));
             }
         }
     }

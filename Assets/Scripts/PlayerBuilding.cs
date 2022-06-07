@@ -29,13 +29,13 @@ public class PlayerBuilding : MonoBehaviour
         {
             spawnQueue.Add(unit.spawnTime);
             spawnOrder.Add(unit.cubePrefab);
-            Debug.Log($"{unit.unitName} added to the building queue.");
+            StartCoroutine(LogController.instance.ShowMessage($"{unit.unitName} added to the building queue."));
 
             ResourceManager.instance.SubtractResource(unit.baseStats.cost);
         }
         else
         {
-            Debug.Log("Not enough resources!");
+            StartCoroutine(LogController.instance.ShowMessage("Not enough resources!"));
         }
 
         if (spawnQueue.Count == 1)

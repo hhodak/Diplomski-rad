@@ -124,13 +124,13 @@ public class Worker : MonoBehaviour
         if (building.baseStats.cost <= ResourceManager.instance.currentResources)
         {
             SpawnBlueprint(building.buildingBlueprintPrefab);
-            Debug.Log($"{building.buildingName} added to the construction queue.");
+            StartCoroutine(LogController.instance.ShowMessage($"{building.buildingName} added to the construction queue."));
 
             ResourceManager.instance.SubtractResource(building.baseStats.cost);
         }
         else
         {
-            Debug.Log("Not enough resources!");
+            StartCoroutine(LogController.instance.ShowMessage("Not enough resources!"));
         }
     }
 
