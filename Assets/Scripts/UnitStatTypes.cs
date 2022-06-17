@@ -9,4 +9,10 @@ public class UnitStatTypes : ScriptableObject
     {
         public float health, armor, movementSpeed, damage, attackSpeed, attackRange, aggroRange, energy, cost;
     }
+
+    [System.Serializable]
+    public class Siege
+    {
+        public float splashDamage, minimumAttackRange;
+    }
 }

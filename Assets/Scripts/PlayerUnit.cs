@@ -12,6 +12,7 @@ public class PlayerUnit : MonoBehaviour
     NavMeshAgent navMeshAgent;
     public BasicUnit unitType;
     public UnitStatTypes.Base baseStats;
+    public UnitStatTypes.Siege siegeStats;
     public UnitStatDisplay statDisplay;
 
     Collider[] rangeColliders;
@@ -24,6 +25,7 @@ public class PlayerUnit : MonoBehaviour
     private void Start()
     {
         baseStats = unitType.baseStats;
+        siegeStats = unitType.siegeStats;
         statDisplay.SetStatDisplayBasicUnit(baseStats, true);
         navMeshAgent = GetComponent<NavMeshAgent>();
         navMeshAgent.speed = baseStats.movementSpeed;
@@ -111,8 +113,34 @@ public class PlayerUnit : MonoBehaviour
     {
         if (attackCooldown <= 0 && distance <= baseStats.attackRange + 1)
         {
+            DoUnitAttack();
             aggroUnit.TakeDamage(baseStats.damage);
             attackCooldown = baseStats.attackSpeed;
+        }
+    }
+
+    void DoUnitAttack()
+    {
+        switch (unitType.unitType)
+        {
+            case BasicUnit.UnitType.Melee:
+                Debug.Log("Melee animation not implemented yet.");
+                break;
+            case BasicUnit.UnitType.Ranged:
+                Ranged ranged = GetComponent<Ranged>();
+                ranged.RangedAttack(aggroTarget, baseStats.damage);
+                break;
+            case BasicUnit.UnitType.Siege:
+                Siege siege = GetComponent<Siege>();
+                siege.SiegeAttack(aggroTarget, siegeStats.splashDamage);
+                break;
+            case BasicUnit.UnitType.Spellcaster:
+                Debug.Log("Spellcaster animation not implemented yet.");
+                break;
+            case BasicUnit.UnitType.Worker:
+                Debug.Log("Worker animation not implemented yet.");
+                break;
+            default: break;
         }
     }
 

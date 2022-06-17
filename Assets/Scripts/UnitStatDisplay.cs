@@ -47,9 +47,26 @@ public class UnitStatDisplay : MonoBehaviour
         Camera camera = Camera.main; //fix
         gameObject.transform.LookAt(gameObject.transform.position + camera.transform.rotation * Vector3.forward, camera.transform.rotation * Vector3.up);
         healthBar.fillAmount = currentHealth / health;
+        ChangeColor();
         if (currentHealth <= 0)
         {
             Die();
+        }
+    }
+
+    void ChangeColor()
+    {
+        if (currentHealth < health / 3)
+        {
+            healthBar.color = Color.red;
+        }
+        else if (currentHealth < 2 * health / 3)
+        {
+            healthBar.color = Color.yellow;
+        }
+        else
+        {
+            healthBar.color = Color.green;
         }
     }
 

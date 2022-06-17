@@ -95,7 +95,9 @@ GameObject:
   - component: {fileID: 889710460190224922}
   - component: {fileID: 3520949630358295603}
   - component: {fileID: 23740944432246404}
+  - component: {fileID: 6542215274640815185}
   - component: {fileID: 5647264664636860303}
+  - component: {fileID: 4479030488370323808}
   m_Layer: 9
   m_Name: SphereRanged
   m_TagString: Unit
@@ -207,6 +209,19 @@ MonoBehaviour:
   statDisplay: {fileID: 2900200257184863964}
   distance: 0
   attackCooldown: 0
+--- !u!114 &6542215274640815185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5848977642554299309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1341b89bfe0798645873c29204360687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 2473625759454329204, guid: 320522af085417045b495d487b43b081, type: 3}
 --- !u!195 &5647264664636860303
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -229,6 +244,22 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!54 &4479030488370323808
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5848977642554299309}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &7194495612925024797
 PrefabInstance:
   m_ObjectHideFlags: 0

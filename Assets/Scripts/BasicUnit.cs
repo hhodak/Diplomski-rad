@@ -24,4 +24,5 @@ public class BasicUnit : ScriptableObject
 
     [Header("Unit stats")]
     public UnitStatTypes.Base baseStats;
+    public UnitStatTypes.Siege siegeStats;
 }
