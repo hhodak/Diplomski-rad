@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 7372293238112950323}
   - component: {fileID: 9059450315560552927}
   - component: {fileID: -3031467647299378040}
+  - component: {fileID: -3440115984837377836}
   - component: {fileID: 2977343609898668741}
   m_Layer: 8
   m_Name: CubeSpellcater
@@ -230,6 +231,7 @@ MonoBehaviour:
     cost: 0
   siegeStats:
     splashDamage: 0
+    minimumAttackRange: 0
   statDisplay: {fileID: 8312659819777764054}
   hasAggro: 0
   distance: 0
@@ -248,7 +250,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInteracting: 0
   highlight: {fileID: 3987465878050739204}
-  playerActions: {fileID: 0}
+  playerActions: {fileID: 11400000, guid: 508290784c80f154e933da2d46c1def5, type: 2}
+--- !u!114 &-3440115984837377836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5852132777919239718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e1b02aa7552ab48b550a0a7d7a1da6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healingPrefab: {fileID: 3299780061355767275, guid: f3e8c57426467fe4da124a1483f1678c, type: 3}
 --- !u!54 &2977343609898668741
 Rigidbody:
   m_ObjectHideFlags: 0

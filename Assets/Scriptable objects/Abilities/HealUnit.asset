@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2c2721aaa52274ea0d4d6339b09b52, type: 3}
+  m_Name: HealUnit
+  m_EditorClassIdentifier: 
+  abilityName: Healing
+  abilityPrefab: {fileID: 3299780061355767275, guid: f3e8c57426467fe4da124a1483f1678c, type: 3}
+  icon: {fileID: 4033467251304240107, guid: 3b632d805be723a48abe7ebd3fa11e08, type: 3}
+  abilityType: 0
+  baseStats:
+    duration: 1
+    range: 4
+    areaRadius: 1
+    cost: 45
+  healingStats:
+    healingAmount: 30

@@ -10,4 +10,7 @@ public class PlayerActions : ScriptableObject
 
     [Header("Buildings")]
     public List<BasicBuilding> basicBuildings = new List<BasicBuilding>();
+
+    [Header("Abilities")]
+    public List<BasicAbility> basicAbilities = new List<BasicAbility>();
 }

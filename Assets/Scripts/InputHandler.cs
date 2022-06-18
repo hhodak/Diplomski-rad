@@ -105,7 +105,11 @@ public class InputHandler : MonoBehaviour
                         switch (layerHit.value)
                         {
                             case 8://Units layer
-                                   //do something
+                                   //heal
+                                if (selectedUnits.Count == 1 && selectedUnits[0].GetComponent<Spellcaster>() != null)
+                                {
+                                    selectedUnits[0].GetComponent<Spellcaster>().HealUnit(hit.transform);
+                                }
                                 break;
                             case 9://Enemy units layer
                                 foreach (Transform unit in selectedUnits)
