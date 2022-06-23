@@ -16,7 +16,7 @@ MonoBehaviour:
   buildingName: Barracks
   buildingPrefab: {fileID: 3020755611309798252, guid: 6a24ce5a897ef8747b8df12f6b0450fa, type: 3}
   buildingBlueprintPrefab: {fileID: 3020755611309798252, guid: 539a3028af5397d4f8724fa3802d7fd9, type: 3}
-  icon: {fileID: 4033467251304240107, guid: 3b632d805be723a48abe7ebd3fa11e08, type: 3}
+  icon: {fileID: 4033467251304240107, guid: 1ff3e8b10cab70c4bb697443c1798ea2, type: 3}
   spawnTime: 20
   spawnLocation: {x: 0, y: 0.5, z: -1.5}
   baseStats:

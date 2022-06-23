@@ -15,7 +15,7 @@ MonoBehaviour:
   unitName: Melee
   cubePrefab: {fileID: 5852132777919239718, guid: e6869d601b7450f4aae3184cc0354f5f, type: 3}
   spherePrefab: {fileID: 5848977642554299309, guid: ed620f3280c41474f916383108d83a25, type: 3}
-  icon: {fileID: 4033467251304240107, guid: 3b632d805be723a48abe7ebd3fa11e08, type: 3}
+  icon: {fileID: 4033467251304240107, guid: 56cb462e16afbc9439e578e0f39c0790, type: 3}
   unitType: 1
   spawnTime: 5
   baseStats:
@@ -28,3 +28,6 @@ MonoBehaviour:
     aggroRange: 3
     energy: 0
     cost: 50
+  siegeStats:
+    splashDamage: 0
+    minimumAttackRange: 0

@@ -15,7 +15,7 @@ MonoBehaviour:
   unitName: Ranged
   cubePrefab: {fileID: 5852132777919239718, guid: bf0c612cdfba7db4fbdce5b8baebffb7, type: 3}
   spherePrefab: {fileID: 5848977642554299309, guid: a6c5f99cd7ad9ac4f829d53193286153, type: 3}
-  icon: {fileID: 4033467251304240107, guid: 3b632d805be723a48abe7ebd3fa11e08, type: 3}
+  icon: {fileID: 4033467251304240107, guid: 9113b9a3d67254340a5332b554b3bc5a, type: 3}
   unitType: 2
   spawnTime: 5
   baseStats:
@@ -28,3 +28,6 @@ MonoBehaviour:
     aggroRange: 5
     energy: 0
     cost: 75
+  siegeStats:
+    splashDamage: 0
+    minimumAttackRange: 0

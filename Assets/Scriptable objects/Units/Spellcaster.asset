@@ -15,7 +15,7 @@ MonoBehaviour:
   unitName: Spellcaster
   cubePrefab: {fileID: 5852132777919239718, guid: 2e018ab8e6112714dbe7bc996c4dd817, type: 3}
   spherePrefab: {fileID: 5848977642554299309, guid: 225f80edc2d8c5e4eaa6359923f27b3f, type: 3}
-  icon: {fileID: 4033467251304240107, guid: 3b632d805be723a48abe7ebd3fa11e08, type: 3}
+  icon: {fileID: 4033467251304240107, guid: c81b423e9e375bf4392a5c175937d3cb, type: 3}
   unitType: 4
   spawnTime: 7
   baseStats:
@@ -28,3 +28,6 @@ MonoBehaviour:
     aggroRange: 4
     energy: 50
     cost: 75
+  siegeStats:
+    splashDamage: 0
+    minimumAttackRange: 0

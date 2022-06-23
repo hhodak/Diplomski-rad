@@ -15,7 +15,7 @@ MonoBehaviour:
   unitName: Siege
   cubePrefab: {fileID: 5852132777919239718, guid: 4718d166ddca3644e806cb429be62ace, type: 3}
   spherePrefab: {fileID: 5848977642554299309, guid: 23f80132465d5074290bb0a0c3fd2b5a, type: 3}
-  icon: {fileID: 4033467251304240107, guid: 3b632d805be723a48abe7ebd3fa11e08, type: 3}
+  icon: {fileID: 4033467251304240107, guid: 37a31039383339e49a16b9a87d38971f, type: 3}
   unitType: 3
   spawnTime: 6
   baseStats:

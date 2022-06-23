@@ -16,4 +16,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 72b7e6d57b25da0499d61dbc5999d2cf, type: 2}
   - {fileID: 11400000, guid: 5f019e085f1f5614fb1c5af9cddf5875, type: 2}
   - {fileID: 11400000, guid: 923bbf33b570493438f2dd5a67ba6285, type: 2}
+  - {fileID: 11400000, guid: d808b01526fac1449b8951bc7f2fa068, type: 2}
   basicBuildings: []
+  basicAbilities: []

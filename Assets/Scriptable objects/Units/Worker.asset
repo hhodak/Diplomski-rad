@@ -15,7 +15,7 @@ MonoBehaviour:
   unitName: Worker
   cubePrefab: {fileID: 5852132777919239718, guid: bf061c19cf6e70d43bbdc1f5ec9371ba, type: 3}
   spherePrefab: {fileID: 5848977642554299309, guid: e6ecd9517bca31944b53187a3854552b, type: 3}
-  icon: {fileID: 4033467251304240107, guid: 3b632d805be723a48abe7ebd3fa11e08, type: 3}
+  icon: {fileID: 4033467251304240107, guid: dc1d3fb4e64a7344982890bff95185c2, type: 3}
   unitType: 0
   spawnTime: 3
   baseStats:
@@ -28,3 +28,6 @@ MonoBehaviour:
     aggroRange: 2
     energy: 0
     cost: 25
+  siegeStats:
+    splashDamage: 0
+    minimumAttackRange: 0

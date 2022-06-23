@@ -16,7 +16,7 @@ MonoBehaviour:
   buildingName: Command Center
   buildingPrefab: {fileID: 3020755611309798252, guid: 6b8d37f5d60457349b811a0ac0280e05, type: 3}
   buildingBlueprintPrefab: {fileID: 3020755611309798252, guid: cba294495921f3c418042b530fde5141, type: 3}
-  icon: {fileID: 4033467251304240107, guid: 3b632d805be723a48abe7ebd3fa11e08, type: 3}
+  icon: {fileID: 4033467251304240107, guid: f90694004ab3d264e8f48035b94a4e30, type: 3}
   spawnTime: 30
   spawnLocation: {x: 0, y: 0.5, z: -1.5}
   baseStats:
