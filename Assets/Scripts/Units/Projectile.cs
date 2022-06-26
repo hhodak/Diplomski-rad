@@ -67,19 +67,25 @@ public class Projectile : MonoBehaviour
     {
         foreach (var unit in affectedUnits)
         {
-            float distance = Vector3.Distance(transform.position, unit.position);
-            float damagePercentage = (float)System.Math.Round(Mathf.Clamp01(1 - (distance / damageRadius)), 2);
-            UnitStatDisplay usd = unit.gameObject.GetComponentInChildren<UnitStatDisplay>();
-            float totalDamage = damagePercentage * damageAmount;
-            usd.TakeDamage(totalDamage);
+            if (unit != null)
+            {
+                float distance = Vector3.Distance(transform.position, unit.position);
+                float damagePercentage = (float)System.Math.Round(Mathf.Clamp01(1 - (distance / damageRadius)), 2);
+                UnitStatDisplay usd = unit.gameObject.GetComponentInChildren<UnitStatDisplay>();
+                float totalDamage = damagePercentage * damageAmount;
+                usd.TakeDamage(totalDamage);
+            }
         }
         foreach (var building in affectedBuildings)
         {
-            float distance = Vector3.Distance(transform.position, building.position);
-            float damagePercentage = (float)System.Math.Round(Mathf.Clamp01(1 - (distance / damageRadius)), 2);
-            UnitStatDisplay usd = building.gameObject.GetComponentInChildren<UnitStatDisplay>(); //check if it is BuildingStatDisplay
-            float totalDamage = damagePercentage * damageAmount * 1.25f;
-            usd.TakeDamage(totalDamage);
+            if (building != null)
+            {
+                float distance = Vector3.Distance(transform.position, building.position);
+                float damagePercentage = (float)System.Math.Round(Mathf.Clamp01(1 - (distance / damageRadius)), 2);
+                UnitStatDisplay usd = building.gameObject.GetComponentInChildren<UnitStatDisplay>(); //check if it is BuildingStatDisplay
+                float totalDamage = damagePercentage * damageAmount * 1.25f;
+                usd.TakeDamage(totalDamage);
+            }
         }
     }
 

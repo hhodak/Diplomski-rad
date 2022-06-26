@@ -93,12 +93,11 @@ GameObject:
   - component: {fileID: 3460256401620153362}
   - component: {fileID: 4919049308116683455}
   - component: {fileID: 582336110855228719}
-  - component: {fileID: 2682704113795187960}
   - component: {fileID: 6357584811023461625}
-  - component: {fileID: 8155257187055026449}
   - component: {fileID: -260794478944589955}
-  m_Layer: 8
-  m_Name: CommandCenter
+  - component: {fileID: 6807019493368571673}
+  m_Layer: 9
+  m_Name: CommandCenterEnemy
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,7 +147,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8bc52b24a7141b64a9c9cc93ea1fc2cf, type: 2}
+  - {fileID: 2100000, guid: 684bfb9cf81a72748bf56e0579674635, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -170,27 +169,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2682704113795187960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3020755611309798252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b499037b240fff64ead14fac3e6291e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingType: {fileID: 11400000, guid: 04181cb0a00a93441b9c56aa1ad74692, type: 2}
-  baseStats:
-    health: 0
-    armor: 0
-    cost: 0
-  statDisplay: {fileID: 5420194611710300281}
-  spawnQueue: []
-  spawnOrder: []
-  spawnPoint: {fileID: 0}
 --- !u!65 &6357584811023461625
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -204,23 +182,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8155257187055026449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3020755611309798252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ccb6bf063906a4a97e13d18234f637, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isInteracting: 0
-  highlight: {fileID: 1881131143871725656}
-  actions: {fileID: 11400000, guid: b141cad133310c848bb365e62df36eff, type: 2}
-  spawnMarker: {fileID: 8842332186760173434}
-  maxMarkerDistance: 10
 --- !u!54 &-260794478944589955
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -237,6 +198,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6807019493368571673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3020755611309798252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18e8d6ef59a798045929742f5a5767ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingType: {fileID: 11400000, guid: 04181cb0a00a93441b9c56aa1ad74692, type: 2}
+  baseStats:
+    health: 0
+    armor: 0
+    cost: 0
+  statDisplay: {fileID: 5420194611710300281}
+  spawnQueue: []
+  spawnOrder: []
+  spawnPoint: {fileID: 0}
 --- !u!1 &8842332186760173434
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,4 +38,9 @@ public class LogController : MonoBehaviour
         yield return new WaitForSeconds(messageDuration);
         messageText.text = "";
     }
+
+    public float GetElapsedTime()
+    {
+        return elapsedTime;
+    }
 }

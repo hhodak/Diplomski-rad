@@ -8,7 +8,8 @@ public class UnitStatDisplay : MonoBehaviour
     public float health, armor, currentHealth, energy, currentEnergy;
     [SerializeField] private Image healthBar;
     [SerializeField] private Image energyBar;
-    bool isPlayerUnit = false;
+    bool isPlayerAsset = false;
+    bool isUnit = false;
     static bool hasPassivelyRestored = true;
 
     public void SetStatDisplayBasicUnit(UnitStatTypes.Base stats, bool isPlayer)
@@ -16,7 +17,8 @@ public class UnitStatDisplay : MonoBehaviour
         health = stats.health;
         energy = stats.energy;
         armor = stats.armor;
-        isPlayerUnit = isPlayer;
+        isPlayerAsset = isPlayer;
+        isUnit = true;
         currentHealth = health;
         currentEnergy = energy;
 
@@ -27,7 +29,7 @@ public class UnitStatDisplay : MonoBehaviour
     {
         health = stats.health;
         armor = stats.armor;
-        isPlayerUnit = isPlayer;
+        isPlayerAsset = isPlayer;
         currentHealth = health;
     }
 
@@ -90,16 +92,41 @@ public class UnitStatDisplay : MonoBehaviour
 
     private void Die()
     {
-        if (isPlayerUnit)
+        if (isPlayerAsset)
         {
-            InputHandler.instance.selectedUnits.Remove(gameObject.transform.parent);
-            InputHandler.instance.RemoveDestroyedUnitFromHotkey(gameObject.transform.parent);
-            Destroy(gameObject.transform.parent.gameObject);
+            if (isUnit)
+            {
+                GameManager.GameStats.unitsLost++;
+                InputHandler.instance.selectedUnits.Remove(gameObject.transform.parent);
+                InputHandler.instance.RemoveDestroyedUnitFromHotkey(gameObject.transform.parent);
+                Destroy(gameObject.transform.parent.gameObject);
+            }
+            else
+            {
+                GameManager.GameStats.buildingsLost++;
+                if (InputHandler.instance.selectedBuilding == this)
+                {
+                    InputHandler.instance.selectedBuilding = null;
+                }
+                GameManager.instance.BuildingDestroyed(true);
+                Destroy(gameObject.transform.parent.gameObject);
+            }
         }
         else
         {
-            ResourceManager.instance.AddXP(gameObject.transform.parent.GetComponent<EnemyUnit>().baseStats.cost);
-            Destroy(gameObject.transform.parent.gameObject);
+            if (isUnit)
+            {
+                GameManager.GameStats.unitsKilled++;
+                //ResourceManager.instance.AddXP(gameObject.transform.parent.GetComponent<EnemyUnit>().baseStats.cost);
+                Destroy(gameObject.transform.parent.gameObject);
+            }
+            else
+            {
+                GameManager.GameStats.buildingsDestroyed++;
+                //ResourceManager.instance.AddXP(gameObject.transform.parent.GetComponent<EnemyUnit>().baseStats.cost);
+                GameManager.instance.BuildingDestroyed(false);
+                Destroy(gameObject.transform.parent.gameObject);
+            }
         }
     }
 

@@ -44,12 +44,14 @@ public class ResourceManager : MonoBehaviour
     public void AddResources(float resourcesAmount)
     {
         currentResources += resourcesAmount;
+        GameManager.GameStats.resourcesMined += resourcesAmount;
         resourcesText.text = currentResources.ToString("F2");
     }
 
     public void SubtractResource(float resourcesAmount)
     {
         currentResources -= (resourcesAmount < currentResources) ? resourcesAmount : currentResources;
+        GameManager.GameStats.resourcesSpent += resourcesAmount;
         resourcesText.text = currentResources.ToString("F2");
     }
 }

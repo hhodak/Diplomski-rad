@@ -36,7 +36,7 @@ public class InputHandler : MonoBehaviour
 
     public void HandleUserInput()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.Escape))
         {
             GamePause();
         }
@@ -286,10 +286,10 @@ public class InputHandler : MonoBehaviour
         }
     }
 
-    void GamePause()
+    public void GamePause()
     {
         Time.timeScale = isGamePause.GetHashCode();
         isGamePause = !isGamePause;
         pausePanel.SetActive(isGamePause);
-    }
+    }    
 }

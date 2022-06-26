@@ -20,7 +20,7 @@ public class PlayerBuilding : MonoBehaviour
     {
         baseStats = buildingType.baseStats;
         spawnPoint = transform.GetChild(1).gameObject;
-        //statDisplay.SetStatDisplayBasicBuilding(baseStats, true);
+        statDisplay.SetStatDisplayBasicBuilding(baseStats, true);
     }
 
     public void SpawnUnit(BasicUnit unit)
@@ -51,6 +51,7 @@ public class PlayerBuilding : MonoBehaviour
     public void SpawnObject()
     {
         GameObject spawnedObject = Instantiate(spawnOrder[0], spawnPoint.transform.parent.position + buildingType.spawnLocation, Quaternion.identity);
+        GameManager.GameStats.unitsBuilt++;
 
         PlayerUnit playerUnit = spawnedObject.GetComponent<PlayerUnit>();
         playerUnit.transform.SetParent(GameObject.Find("Player" + playerUnit.unitType.unitType.ToString()).transform);
