@@ -33,18 +33,21 @@ public class Projectile : MonoBehaviour
 
     public void Launch(Vector3 targetPosition, ProjectileType type, float damageAmount)
     {
-        float distance = Vector3.Distance(targetPosition, transform.position);
-        float duration = distance / movementSpeed;
-        float jumpHeight = 1 + (0.1f * distance);
-        transform.DOJump(targetPosition, jumpHeight, 1, duration);
-        switch (type)
+        if (targetPosition != null)
         {
-            case ProjectileType.Arrow:
-                StartCoroutine(DestroyProjectile(duration));
-                break;
-            case ProjectileType.CannonBall:
-                StartCoroutine(Explode(duration, damageAmount));
-                break;
+            float distance = Vector3.Distance(targetPosition, transform.position);
+            float duration = distance / movementSpeed;
+            float jumpHeight = 1 + (0.1f * distance);
+            transform.DOJump(targetPosition, jumpHeight, 1, duration);
+            switch (type)
+            {
+                case ProjectileType.Arrow:
+                    StartCoroutine(DestroyProjectile(duration));
+                    break;
+                case ProjectileType.CannonBall:
+                    StartCoroutine(Explode(duration, damageAmount));
+                    break;
+            }
         }
     }
 

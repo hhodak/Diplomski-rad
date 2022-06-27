@@ -9,12 +9,13 @@ public class Blueprint : MonoBehaviour
     public Material blueprintMaterial;
     public Material blueprintInvalidMaterial;
     BuildingPlacement buildingPlacement;
-    Renderer renderer;
+    Renderer rendererModel;
+    public GameObject model;
 
     void Start()
     {
         buildingPlacement = GetComponent<BuildingPlacement>();
-        renderer = GetComponent<Renderer>();
+        rendererModel = model.GetComponent<Renderer>();
         StickBlueprintToMouse();
         InputHandler.instance.isBuildingProcess = true;
     }
@@ -38,6 +39,7 @@ public class Blueprint : MonoBehaviour
             {
                 Vector3 position = new Vector3(transform.position.x, prefab.transform.position.y, transform.position.z);
                 GameObject building = Instantiate(prefab, position, transform.rotation);
+                GameManager.GameStats.buildingsConstructed++;
                 ActionFrame.instance.SetBuildingParent(building);
                 InputHandler.instance.isBuildingProcess = false;
                 Destroy(gameObject);
@@ -73,6 +75,6 @@ public class Blueprint : MonoBehaviour
 
     void SetBlueprintMaterial(Material material)
     {
-        renderer.material = material;
+        rendererModel.material = material;
     }
 }

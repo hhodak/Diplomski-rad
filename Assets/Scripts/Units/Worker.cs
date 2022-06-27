@@ -18,6 +18,8 @@ public class Worker : MonoBehaviour
     public int maxCargoAmount = 5;
     private PlayerUnit playerUnit;
     public WorkerState state = WorkerState.Other;
+    public GameObject cargoGO;
+    public GameObject dustParticles;
 
     private void Start()
     {
@@ -96,10 +98,13 @@ public class Worker : MonoBehaviour
     IEnumerator GatherResources()
     {
         playerUnit.StopUnit();
+        dustParticles.SetActive(true);
         yield return new WaitForSeconds(2);
         cargo = resourceNode.GetComponent<Resource>().GatheredResources(maxCargoAmount);
         CheckRemainingResouces();
         ChangeWorkerState(WorkerState.ReturningCargo);
+        cargoGO.SetActive(true);
+        dustParticles.SetActive(false);
     }
 
     void CheckRemainingResouces()
@@ -117,6 +122,7 @@ public class Worker : MonoBehaviour
         yield return new WaitForSeconds(1);
         ResourceManager.instance.AddResources(cargo);
         cargo = 0;
+        cargoGO.SetActive(false);
     }
 
     public void SpawnBuilding(BasicBuilding building)
