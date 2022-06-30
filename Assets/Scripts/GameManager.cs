@@ -32,11 +32,13 @@ public class GameManager : MonoBehaviour
             if (playerBuildings == 0)
             {
                 gameEnded = true;
+                AudioManager.instance.PlaySound("GameLost");
                 ShowEndGameScreen(false);
             }
             if (enemyBuildings == 0)
             {
                 gameEnded = true;
+                AudioManager.instance.PlaySound("GameWon");
                 GameStats.gameWon = true;
                 ShowEndGameScreen(true);
             }

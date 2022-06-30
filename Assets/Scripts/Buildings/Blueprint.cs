@@ -11,13 +11,16 @@ public class Blueprint : MonoBehaviour
     BuildingPlacement buildingPlacement;
     Renderer rendererModel;
     public GameObject model;
+    AudioSource audioSource;
 
     void Start()
     {
         buildingPlacement = GetComponent<BuildingPlacement>();
         rendererModel = model.GetComponent<Renderer>();
+        audioSource = GetComponent<AudioSource>();
         StickBlueprintToMouse();
         InputHandler.instance.isBuildingProcess = true;
+        PlaySound();
     }
 
     void Update()
@@ -42,6 +45,7 @@ public class Blueprint : MonoBehaviour
                 GameManager.GameStats.buildingsConstructed++;
                 ActionFrame.instance.SetBuildingParent(building);
                 InputHandler.instance.isBuildingProcess = false;
+                StopPlayingSound();
                 Destroy(gameObject);
             }
             else
@@ -52,6 +56,7 @@ public class Blueprint : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             InputHandler.instance.isBuildingProcess = false;
+            StopPlayingSound();
             Destroy(gameObject);
         }
     }
@@ -76,5 +81,15 @@ public class Blueprint : MonoBehaviour
     void SetBlueprintMaterial(Material material)
     {
         rendererModel.material = material;
+    }
+
+    void PlaySound()
+    {
+        audioSource.Play();
+    }
+
+    void StopPlayingSound()
+    {
+        audioSource.Stop();
     }
 }

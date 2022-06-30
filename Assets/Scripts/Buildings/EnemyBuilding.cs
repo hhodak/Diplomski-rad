@@ -17,45 +17,38 @@ public class EnemyBuilding : MonoBehaviour
     private void Start()
     {
         baseStats = buildingType.baseStats;
-        spawnPoint = transform.GetChild(1).gameObject;
+        spawnPoint = transform.GetChild(2).gameObject;
         statDisplay.SetStatDisplayBasicBuilding(baseStats, false);
     }
 
-    //public void SpawnUnit(BasicUnit unit)
-    //{
-    //    if (unit.baseStats.cost <= ResourceManager.instance.currentResources)
-    //    {
-    //        spawnQueue.Add(unit.spawnTime);
-    //        spawnOrder.Add(unit.cubePrefab);
-    //        StartCoroutine(LogController.instance.ShowMessage($"{unit.unitName} added to the building queue."));
+    public void SpawnUnit(BasicUnit unit)
+    {
+        if (unit.baseStats.cost <= EnemyManager.instance.numberOfResources)
+        {
+            spawnQueue.Add(unit.spawnTime);
+            spawnOrder.Add(unit.spherePrefab);
+            EnemyManager.instance.numberOfResources -= unit.baseStats.cost;
+        }
 
-    //        ResourceManager.instance.SubtractResource(unit.baseStats.cost);
-    //    }
-    //    else
-    //    {
-    //        StartCoroutine(LogController.instance.ShowMessage("Not enough resources!"));
-    //    }
+        if (spawnQueue.Count == 1)
+        {
+            ActionTimer.instance.StartCoroutine(ActionTimer.instance.SpawnQueueTimerEnemy(this));
+        }
+        else if (spawnQueue.Count == 0)
+        {
+            ActionTimer.instance.StopAllCoroutines();
+        }
+    }
 
-    //    if (spawnQueue.Count == 1)
-    //    {
-    //        ActionTimer.instance.StartCoroutine(ActionTimer.instance.SpawnQueueTimer(this));
-    //    }
-    //    else if (spawnQueue.Count == 0)
-    //    {
-    //        ActionTimer.instance.StopAllCoroutines();
-    //    }
-    //}
+    public void SpawnObject()
+    {
+        GameObject spawnedObject = Instantiate(spawnOrder[0], spawnPoint.transform.parent.position + buildingType.spawnLocation, Quaternion.identity);
 
-    //public void SpawnObject()
-    //{
-    //    GameObject spawnedObject = Instantiate(spawnOrder[0], spawnPoint.transform.parent.position + buildingType.spawnLocation, Quaternion.identity);
-    //    GameManager.GameStats.unitsBuilt++;
+        EnemyUnit enemyUnit = spawnedObject.GetComponent<EnemyUnit>();
+        enemyUnit.transform.SetParent(GameObject.Find("Enemy" + enemyUnit.unitType.unitType.ToString()).transform);
 
-    //    PlayerUnit playerUnit = spawnedObject.GetComponent<PlayerUnit>();
-    //    playerUnit.transform.SetParent(GameObject.Find("Player" + playerUnit.unitType.unitType.ToString()).transform);
-
-    //    playerUnit.MoveUnit(spawnPoint.transform.position);
-    //    spawnQueue.Remove(spawnQueue[0]);
-    //    spawnOrder.Remove(spawnOrder[0]);
-    //}
+        enemyUnit.MoveUnit(spawnPoint.transform.position);
+        spawnQueue.Remove(spawnQueue[0]);
+        spawnOrder.Remove(spawnOrder[0]);
+    }
 }

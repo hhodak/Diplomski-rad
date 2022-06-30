@@ -19,7 +19,7 @@ public class PlayerBuilding : MonoBehaviour
     private void Start()
     {
         baseStats = buildingType.baseStats;
-        spawnPoint = transform.GetChild(1).gameObject;
+        spawnPoint = transform.GetChild(2).gameObject;
         statDisplay.SetStatDisplayBasicBuilding(baseStats, true);
     }
 
@@ -40,7 +40,7 @@ public class PlayerBuilding : MonoBehaviour
 
         if (spawnQueue.Count == 1)
         {
-            ActionTimer.instance.StartCoroutine(ActionTimer.instance.SpawnQueueTimer(this));
+            ActionTimer.instance.StartCoroutine(ActionTimer.instance.SpawnQueueTimerPlayer(this));
         }
         else if (spawnQueue.Count == 0)
         {
@@ -54,6 +54,8 @@ public class PlayerBuilding : MonoBehaviour
         GameManager.GameStats.unitsBuilt++;
 
         PlayerUnit playerUnit = spawnedObject.GetComponent<PlayerUnit>();
+        UnitStatDisplay usd = spawnedObject.gameObject.GetComponentInChildren<UnitStatDisplay>();
+        usd.PlaySoundUnit("Spawn");
         playerUnit.transform.SetParent(GameObject.Find("Player" + playerUnit.unitType.unitType.ToString()).transform);
 
         playerUnit.MoveUnit(spawnPoint.transform.position);

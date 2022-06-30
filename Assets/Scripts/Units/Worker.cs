@@ -12,19 +12,31 @@ public class Worker : MonoBehaviour
         ReturningCargo
     }
 
+    [SerializeField]
+    bool isPlayer;
     public Transform resourceNode;
     public Transform commandCenter;
     public float cargo = 0;
     public int maxCargoAmount = 5;
     private PlayerUnit playerUnit;
+    private EnemyUnit enemyUnit;
     public WorkerState state = WorkerState.Other;
     public GameObject cargoGO;
     public GameObject dustParticles;
+    private AudioSource audioSource;
 
     private void Start()
     {
-        playerUnit = GetComponent<PlayerUnit>();
-        playerUnit.StopUnit();
+        audioSource = GetComponent<AudioSource>();
+        if (isPlayer)
+        {
+            playerUnit = GetComponent<PlayerUnit>();
+            playerUnit.StopUnit();
+        }
+        else
+        {
+            enemyUnit = GetComponent<EnemyUnit>();
+        }
     }
 
     private void Update()
@@ -40,7 +52,7 @@ public class Worker : MonoBehaviour
         if (isWorkOrdered)
         {
             resourceNode = resource;
-            GameObject parent = GameObject.Find("PlayerCommandCenter");
+            GameObject parent = isPlayer ? GameObject.Find("PlayerCommandCenter") : GameObject.Find("EnemyCommandCenter");
             commandCenter = parent.transform.GetChild(0);
         }
         else
@@ -61,13 +73,22 @@ public class Worker : MonoBehaviour
                 StartCoroutine(GatherResources());
                 break;
             case WorkerState.GoingToResource:
-                playerUnit.MoveUnit(resourceNode.position);
+                if (isPlayer)
+                    playerUnit.MoveUnit(resourceNode.position);
+                else
+                    enemyUnit.MoveUnit(resourceNode.position);
                 break;
             case WorkerState.ReturningCargo:
-                playerUnit.MoveUnit(commandCenter.position);
+                if (isPlayer)
+                    playerUnit.MoveUnit(commandCenter.position);
+                else
+                    enemyUnit.MoveUnit(commandCenter.position);
                 break;
             case WorkerState.Other:
-                playerUnit.StopUnit();
+                if (isPlayer)
+                    playerUnit.StopUnit();
+                else
+                    enemyUnit.StopUnit();
                 break;
         }
     }
@@ -97,9 +118,14 @@ public class Worker : MonoBehaviour
 
     IEnumerator GatherResources()
     {
-        playerUnit.StopUnit();
+        if (isPlayer)
+            playerUnit.StopUnit();
+        else
+            enemyUnit.StopUnit();
         dustParticles.SetActive(true);
+        PlaySound();
         yield return new WaitForSeconds(2);
+        StopPlayingSound();
         cargo = resourceNode.GetComponent<Resource>().GatheredResources(maxCargoAmount);
         CheckRemainingResouces();
         ChangeWorkerState(WorkerState.ReturningCargo);
@@ -118,11 +144,17 @@ public class Worker : MonoBehaviour
 
     IEnumerator ReturnCargo()
     {
-        playerUnit.StopUnit();
-        yield return new WaitForSeconds(1);
-        ResourceManager.instance.AddResources(cargo);
-        cargo = 0;
+        if (isPlayer)
+            playerUnit.StopUnit();
+        else
+            enemyUnit.StopUnit();
         cargoGO.SetActive(false);
+        yield return new WaitForSeconds(1);
+        if (isPlayer)
+            ResourceManager.instance.AddResources(cargo);
+        else
+            EnemyManager.instance.numberOfResources += cargo;
+        cargo = 0;
     }
 
     public void SpawnBuilding(BasicBuilding building)
@@ -143,5 +175,15 @@ public class Worker : MonoBehaviour
     void SpawnBlueprint(GameObject blueprint)
     {
         Instantiate(blueprint);
+    }
+
+    void PlaySound()
+    {
+        audioSource.Play();
+    }
+
+    void StopPlayingSound()
+    {
+        audioSource.Stop();
     }
 }

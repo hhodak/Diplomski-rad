@@ -7,15 +7,12 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance;
 
     public Transform playerUnits;
-    public Transform enemyUnits;
-
     public Transform playerBuildings;
 
     private void Awake()
     {
         instance = this;
         SetBasicStats(playerUnits);
-        SetBasicStats(enemyUnits);
         SetBasicStats(playerBuildings);
     }
 
@@ -34,11 +31,6 @@ public class PlayerManager : MonoBehaviour
                 {
                     PlayerUnit playerUnit = obj.GetComponent<PlayerUnit>();
                     playerUnit.baseStats = UnitHandler.instance.GetBasicUnitStats(AssetNameParser(child.name));
-                }
-                else if (type == enemyUnits)
-                {
-                    EnemyUnit enemyUnit = obj.GetComponent<EnemyUnit>();
-                    enemyUnit.baseStats = UnitHandler.instance.GetBasicUnitStats(AssetNameParser(child.name));
                 }
                 else if (type == playerBuildings)
                 {

@@ -124,7 +124,8 @@ public class PlayerUnit : MonoBehaviour
         switch (unitType.unitType)
         {
             case BasicUnit.UnitType.Melee:
-                Debug.Log("Melee animation not implemented yet.");
+                Melee melee = GetComponent<Melee>();
+                melee.MeleeAttack();
                 break;
             case BasicUnit.UnitType.Ranged:
                 Ranged ranged = GetComponent<Ranged>();

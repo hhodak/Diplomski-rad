@@ -5,6 +5,12 @@ using UnityEngine;
 public class Siege : MonoBehaviour
 {
     public GameObject projectilePrefab;
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     public void SiegeAttack(Transform target, float damage)
     {
@@ -12,6 +18,7 @@ public class Siege : MonoBehaviour
         {
             GameObject newProjectile = Instantiate(projectilePrefab, transform.position, transform.rotation, transform);
             Projectile projectile = newProjectile.GetComponent<Projectile>();
+            PlaySound();
             projectile.Launch(target.position, Projectile.ProjectileType.CannonBall, damage);
         }
     }
@@ -26,5 +33,10 @@ public class Siege : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    void PlaySound()
+    {
+        audioSource.Play();
     }
 }

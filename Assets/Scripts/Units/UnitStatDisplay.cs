@@ -99,6 +99,7 @@ public class UnitStatDisplay : MonoBehaviour
                 GameManager.GameStats.unitsLost++;
                 InputHandler.instance.selectedUnits.Remove(gameObject.transform.parent);
                 InputHandler.instance.RemoveDestroyedUnitFromHotkey(gameObject.transform.parent);
+                PlaySoundUnit("Death");
                 Destroy(gameObject.transform.parent.gameObject);
             }
             else
@@ -109,6 +110,7 @@ public class UnitStatDisplay : MonoBehaviour
                     InputHandler.instance.selectedBuilding = null;
                 }
                 GameManager.instance.BuildingDestroyed(true);
+                PlaySoundBuilding();
                 Destroy(gameObject.transform.parent.gameObject);
             }
         }
@@ -118,6 +120,7 @@ public class UnitStatDisplay : MonoBehaviour
             {
                 GameManager.GameStats.unitsKilled++;
                 //ResourceManager.instance.AddXP(gameObject.transform.parent.GetComponent<EnemyUnit>().baseStats.cost);
+                PlaySoundUnit("Death");
                 Destroy(gameObject.transform.parent.gameObject);
             }
             else
@@ -125,6 +128,7 @@ public class UnitStatDisplay : MonoBehaviour
                 GameManager.GameStats.buildingsDestroyed++;
                 //ResourceManager.instance.AddXP(gameObject.transform.parent.GetComponent<EnemyUnit>().baseStats.cost);
                 GameManager.instance.BuildingDestroyed(false);
+                PlaySoundBuilding();
                 Destroy(gameObject.transform.parent.gameObject);
             }
         }
@@ -147,5 +151,18 @@ public class UnitStatDisplay : MonoBehaviour
         yield return new WaitForSeconds(3); //new property?
         RestoreEnergy(1);
         hasPassivelyRestored = true;
+    }
+
+    public void PlaySoundBuilding()
+    {
+        Transform soundGO = transform.parent.GetChild(4);
+        soundGO.gameObject.SetActive(true);
+        soundGO.SetParent(null);
+    }
+
+    public void PlaySoundUnit(string name)
+    {
+        Transform soundGO = transform.parent.GetChild(3);
+        soundGO.GetComponent<UnitSoundManager>().PlaySound(name);
     }
 }

@@ -7,9 +7,11 @@ public class Ability : MonoBehaviour
     public BasicAbility abilityType;
     public AbilityStatTypes.Base baseStats;
     public AbilityStatTypes.Healing healingStats;
+    AudioSource audioSource;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         baseStats = abilityType.baseStats;
         healingStats = abilityType.healingStats;
     }
@@ -19,7 +21,8 @@ public class Ability : MonoBehaviour
         UnitStatDisplay unit = target.gameObject.GetComponentInChildren<UnitStatDisplay>();
         unit.RestoreHealth(abilityType.healingStats.healingAmount);
         ShowHealingAnimation();
-        DestroyAbility();
+        PlaySound();
+        StartCoroutine(DestroyAbility());
     }
 
     void ShowHealingAnimation()
@@ -32,5 +35,10 @@ public class Ability : MonoBehaviour
     {
         yield return new WaitForSeconds(baseStats.duration);
         Destroy(gameObject);
+    }
+
+    void PlaySound()
+    {
+        audioSource.Play();
     }
 }

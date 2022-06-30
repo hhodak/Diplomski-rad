@@ -5,8 +5,8 @@ using UnityEngine;
 public class UnitHandler : MonoBehaviour
 {
     public static UnitHandler instance;
-    [SerializeField]
-    BasicUnit worker, melee, ranged, siege, spellcaster;
+    //[SerializeField]
+    public BasicUnit worker, melee, ranged, siege, spellcaster;
 
     public LayerMask playerUnitLayer, enemyUnitLayer;
 

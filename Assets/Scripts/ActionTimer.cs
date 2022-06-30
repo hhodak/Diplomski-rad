@@ -11,19 +11,32 @@ public class ActionTimer : MonoBehaviour
         instance = this;
     }
 
-    public IEnumerator SpawnQueueTimer(PlayerBuilding pb)
+    public IEnumerator SpawnQueueTimerPlayer(PlayerBuilding pb)
     {
         if (pb.spawnQueue.Count > 0)
         {
-            Debug.Log($"Waiting for {pb.spawnQueue[0]} seconds.");
-
             yield return new WaitForSeconds(pb.spawnQueue[0]);
 
             pb.SpawnObject();
 
             if (pb.spawnQueue.Count > 0)
             {
-                StartCoroutine(SpawnQueueTimer(pb));
+                StartCoroutine(SpawnQueueTimerPlayer(pb));
+            }
+        }
+    }
+
+    public IEnumerator SpawnQueueTimerEnemy(EnemyBuilding eb)
+    {
+        if (eb.spawnQueue.Count > 0)
+        {
+            yield return new WaitForSeconds(eb.spawnQueue[0]);
+
+            eb.SpawnObject();
+
+            if (eb.spawnQueue.Count > 0)
+            {
+                StartCoroutine(SpawnQueueTimerEnemy(eb));
             }
         }
     }

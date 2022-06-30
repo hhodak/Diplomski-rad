@@ -44,6 +44,29 @@ public class EnemyUnit : MonoBehaviour
         }
     }
 
+    public void MoveUnit(Vector3 destination)
+    {
+        if (navMeshAgent == null)
+        {
+            navMeshAgent = GetComponent<NavMeshAgent>();
+        }
+        navMeshAgent.stoppingDistance = 0;
+        navMeshAgent.isStopped = false;
+        navMeshAgent.SetDestination(destination);
+    }
+
+    public void StopUnit()
+    {
+        if (navMeshAgent == null)
+        {
+            navMeshAgent = GetComponent<NavMeshAgent>();
+        }
+        navMeshAgent.stoppingDistance = 0;
+        navMeshAgent.isStopped = true;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+    }
+
     void CheckForEnemyTargets()
     {
         rangeColliders = Physics.OverlapSphere(transform.position, baseStats.aggroRange, UnitHandler.instance.playerUnitLayer);
@@ -90,7 +113,8 @@ public class EnemyUnit : MonoBehaviour
         switch (unitType.unitType)
         {
             case BasicUnit.UnitType.Melee:
-                Debug.Log("Melee animation not implemented yet.");
+                Melee melee = GetComponent<Melee>();
+                melee.MeleeAttack();
                 break;
             case BasicUnit.UnitType.Ranged:
                 Ranged ranged = GetComponent<Ranged>();

@@ -9,7 +9,7 @@ public class CameraMovement : MonoBehaviour
     float rotationSpeedX = 1.5f;
     float rotationSpeedY = -2.0f;
     float minHeight = 2f;
-    float maxHeight = 20f;
+    float maxHeight = 40f;
 
     void Update()
     {

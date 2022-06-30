@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Audio;
 
 public class Projectile : MonoBehaviour
 {
@@ -17,9 +18,11 @@ public class Projectile : MonoBehaviour
     private List<Transform> affectedUnits = new List<Transform>();
     private List<Transform> affectedBuildings = new List<Transform>();
     private float damageRadius;
+    private AudioSource audioSource;
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         damageRadius = GetComponent<SphereCollider>().radius;
     }
 
@@ -60,6 +63,7 @@ public class Projectile : MonoBehaviour
     IEnumerator Explode(float sec, float damageAmount)
     {
         yield return new WaitForSeconds(sec);
+        PlaySound();
         ShowDustCloud();
         DealDamage(damageAmount);
         yield return new WaitForSeconds(1);
@@ -121,5 +125,10 @@ public class Projectile : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = false;
         Transform dust = transform.GetChild(0);
         dust.gameObject.SetActive(true);
+    }
+
+    void PlaySound()
+    {
+        audioSource.Play();
     }
 }
