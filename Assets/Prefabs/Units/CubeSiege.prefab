@@ -201,7 +201,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -239,6 +239,7 @@ MonoBehaviour:
   hasAggro: 0
   distance: 0
   attackCooldown: 0
+  hasDestination: 0
 --- !u!114 &-3031467647299378040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,7 +293,7 @@ AudioSource:
   m_GameObject: {fileID: 5852132777919239718}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: e0c283efdfc67cb43ac39fed77d772aa, type: 2}
   m_audioClip: {fileID: 8300000, guid: 9d7d2fbf076b72a4dbac4c652b9dcc26, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

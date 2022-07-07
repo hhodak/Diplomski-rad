@@ -14,7 +14,9 @@ public class EnemyManager : MonoBehaviour
     private int numberOfWorkers;
     public float numberOfResources;
     [SerializeField]
-    private List<Transform> resourceNodes;
+    private List<Transform> setResourceNodes;
+    private static List<Transform> resourceNodes;
+    public static bool isRemovingResourceNode = false;
 
     int unitSpawningCount = 0;
     [SerializeField]
@@ -24,6 +26,7 @@ public class EnemyManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        resourceNodes = setResourceNodes;
         SetBasicStats(enemyUnits);
         SetBasicStats(enemyBuildings);
     }
@@ -35,7 +38,6 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
-        CheckResourceNodes();
         CheckUnitNumber();
         SpawnUnits();
         if (CanAttackPlayer())
@@ -89,6 +91,7 @@ public class EnemyManager : MonoBehaviour
             Worker w = worker.GetComponent<Worker>();
             w.HandleWorking(true, resourceNodes[0]);
         }
+        isRemovingResourceNode = false;
     }
 
     void SpawnUnits()
@@ -131,16 +134,6 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    void CheckResourceNodes()
-    {
-        Resource r = resourceNodes[0].GetComponent<Resource>();
-        if (r.amount == 0)
-        {
-            resourceNodes.RemoveAt(0);
-            GatherResources();
-        }
-    }
-
     void CheckUnitNumber()
     {
         numberOfWorkers = enemyUnits.GetChild(0).childCount;
@@ -176,5 +169,13 @@ public class EnemyManager : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public void RemoveResourceNode(GameObject node)
+    {
+        isRemovingResourceNode = true;
+        resourceNodes.RemoveAt(0);
+        GatherResources();
+        Destroy(node);
     }
 }

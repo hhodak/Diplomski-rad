@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class UnitSoundManager : MonoBehaviour
 {
     public Sound[] sounds;
+    public AudioMixerGroup audioMixerGroup;
 
 
     // Start is called before the first frame update
@@ -14,6 +16,7 @@ public class UnitSoundManager : MonoBehaviour
         foreach (Sound s in sounds)
         {
             s.audioSource = gameObject.AddComponent<AudioSource>();
+            s.audioSource.outputAudioMixerGroup = audioMixerGroup;
             s.audioSource.clip = s.audioClip;
             s.audioSource.volume = s.volume;
             s.audioSource.pitch = s.pitch;

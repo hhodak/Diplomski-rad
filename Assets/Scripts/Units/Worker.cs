@@ -137,8 +137,16 @@ public class Worker : MonoBehaviour
     {
         if (resourceNode.GetComponent<Resource>().amount == 0)
         {
-            Destroy(resourceNode.gameObject);
-            resourceNode = null;
+            if (!isPlayer && !EnemyManager.isRemovingResourceNode)
+            {
+                EnemyManager.isRemovingResourceNode = true;
+                EnemyManager.instance.RemoveResourceNode(resourceNode.gameObject);
+            }
+            if (isPlayer)
+            {
+                resourceNode = null;
+                Destroy(resourceNode.gameObject);
+            }
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameStatsText : MonoBehaviour
 {
-    private void Start()
+    private void OnEnable()
     {
         string value = MainMenu.instance.GetPropValueToString(transform.name);
         GetComponent<TMPro.TextMeshProUGUI>().text = value;

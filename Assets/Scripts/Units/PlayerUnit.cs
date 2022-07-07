@@ -19,8 +19,10 @@ public class PlayerUnit : MonoBehaviour
     Transform aggroTarget;
     UnitStatDisplay aggroUnit;
     public bool hasAggro = false;
+    public bool hasDestination = false;
     public float distance;
     public float attackCooldown;
+
 
     private void Start()
     {
@@ -36,27 +38,45 @@ public class PlayerUnit : MonoBehaviour
         attackCooldown -= Time.deltaTime;
         if (attackCooldown < 0)
             attackCooldown = 0;
-        if (!hasAggro)
+        if (!hasDestination)
         {
-            CheckForEnemyTargets();
+            if (!hasAggro)
+            {
+                CheckForEnemyTargets();
+            }
+            else
+            {
+                SetTargetDistance();
+                Attack();
+                MoveToAggroTarget();
+            }
         }
         else
         {
-            SetTargetDistance();
-            Attack();
-            MoveToAggroTarget();
+            CheckIfArrivedToDestination();
         }
     }
 
     public void MoveUnit(Vector3 destination)
     {
+        Vector3 fixedDestination = new Vector3(destination.x, transform.position.y, destination.z);
+        hasDestination = true;
         if (navMeshAgent == null)
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
         }
         navMeshAgent.stoppingDistance = 0;
         navMeshAgent.isStopped = false;
-        navMeshAgent.SetDestination(destination);
+        navMeshAgent.SetDestination(fixedDestination);
+    }
+
+    void CheckIfArrivedToDestination()
+    {
+        float dist = navMeshAgent.remainingDistance;
+        if (dist != Mathf.Infinity && navMeshAgent.pathStatus == NavMeshPathStatus.PathComplete && navMeshAgent.remainingDistance == 0 && hasDestination)
+        {
+            hasDestination = false;
+        }
     }
 
     public void StopUnit()
@@ -89,6 +109,7 @@ public class PlayerUnit : MonoBehaviour
         aggroTarget = enemyUnit;
         aggroUnit = aggroTarget.gameObject.GetComponentInChildren<UnitStatDisplay>();
         hasAggro = true;
+        hasDestination = false;
     }
 
     public void MoveToAggroTarget()
