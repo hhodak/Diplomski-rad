@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2562152515147556780}
   m_Layer: 0
-  m_Name: StoneArchLarge_Obj
+  m_Name: LargeArch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

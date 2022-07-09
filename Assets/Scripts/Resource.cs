@@ -23,6 +23,6 @@ public class Resource : MonoBehaviour
     void ScaleResourceObject()
     {
         float scale = Mathf.Floor(amount / resourcePerScale) + 1;
-        transform.localScale = new Vector3(scale, 0.1f, scale);
+        transform.localScale = new Vector3(scale, scale, scale);
     }
 }
