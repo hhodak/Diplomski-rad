@@ -21,7 +21,7 @@ MonoBehaviour:
   baseStats:
     health: 50
     armor: 1
-    movementSpeed: 1.5
+    movementSpeed: 2.5
     damage: 12
     attackSpeed: 1
     attackRange: 1
