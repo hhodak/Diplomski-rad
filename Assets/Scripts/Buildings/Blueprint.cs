@@ -42,6 +42,9 @@ public class Blueprint : MonoBehaviour
             {
                 Vector3 position = new Vector3(transform.position.x, prefab.transform.position.y, transform.position.z);
                 GameObject building = Instantiate(prefab, position, transform.rotation);
+                PlayerBuilding playerBuilding = building.GetComponent<PlayerBuilding>();
+                ResourceManager.instance.SubtractResource(playerBuilding.baseStats.cost);
+                LogController.instance.ShowMessage($"{playerBuilding.buildingType.buildingName} added to the construction queue.");
                 GameManager.GameStats.buildingsConstructed++;
                 ActionFrame.instance.SetBuildingParent(building);
                 InputHandler.instance.isBuildingProcess = false;
@@ -50,7 +53,7 @@ public class Blueprint : MonoBehaviour
             }
             else
             {
-                StartCoroutine(LogController.instance.ShowMessage("Invalid location!"));
+                LogController.instance.ShowMessage("Invalid location!");
             }
         }
         if (Input.GetMouseButtonDown(1))

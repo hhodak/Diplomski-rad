@@ -63,18 +63,18 @@ public class UnitStatDisplay : MonoBehaviour
 
     void HandleHealthAndEnergy()
     {
-        Camera camera = Camera.main; //fix
+        Camera camera = Camera.main;
         gameObject.transform.LookAt(gameObject.transform.position + camera.transform.rotation * Vector3.forward, camera.transform.rotation * Vector3.up);
         healthBar.fillAmount = currentHealth / health;
         energyBar.fillAmount = currentEnergy / energy;
-        ChangeColor();
+        ChangeHealthBarColor();
         if (currentHealth <= 0)
         {
             Die();
         }
     }
 
-    void ChangeColor()
+    void ChangeHealthBarColor()
     {
         if (currentHealth < health / 3)
         {
@@ -119,14 +119,12 @@ public class UnitStatDisplay : MonoBehaviour
             if (isUnit)
             {
                 GameManager.GameStats.unitsKilled++;
-                //ResourceManager.instance.AddXP(gameObject.transform.parent.GetComponent<EnemyUnit>().baseStats.cost);
                 PlaySoundUnit("Death");
                 Destroy(gameObject.transform.parent.gameObject);
             }
             else
             {
                 GameManager.GameStats.buildingsDestroyed++;
-                //ResourceManager.instance.AddXP(gameObject.transform.parent.GetComponent<EnemyUnit>().baseStats.cost);
                 GameManager.instance.BuildingDestroyed(false);
                 PlaySoundBuilding();
                 Destroy(gameObject.transform.parent.gameObject);

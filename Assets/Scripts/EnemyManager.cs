@@ -150,7 +150,7 @@ public class EnemyManager : MonoBehaviour
         {
             foreach (Transform unit in enemyUnits.GetChild(i))
             {
-                unit.GetComponent<EnemyUnit>().MoveUnit(approxEnemyBase);
+                unit.GetComponent<EnemyUnit>().MoveUnit(GetPlayerBaseLocation());
                 //set speed to match slowest member
             }
         }
@@ -177,5 +177,18 @@ public class EnemyManager : MonoBehaviour
         resourceNodes.RemoveAt(0);
         GatherResources();
         Destroy(node);
+    }
+
+    Vector3 GetPlayerBaseLocation()
+    {
+        Transform pb = PlayerManager.instance.playerBuildings;
+        for (int i = 0; i < 2; i++)
+        {
+            foreach (Transform child in pb.GetChild(i))
+            {
+                return child.position;
+            }
+        }
+        return approxEnemyBase;
     }
 }

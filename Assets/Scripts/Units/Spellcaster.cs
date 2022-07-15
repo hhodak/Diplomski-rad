@@ -59,7 +59,7 @@ public class Spellcaster : MonoBehaviour
         }
         else
         {
-            StartCoroutine(LogController.instance.ShowMessage("Not enough energy!"));
+            LogController.instance.ShowMessage("Not enough energy!");
             Destroy(heal);
         }
         healingTagret = null;

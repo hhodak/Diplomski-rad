@@ -32,7 +32,12 @@ public class LogController : MonoBehaviour
                         t.Seconds);
     }
 
-    public IEnumerator ShowMessage(string message)
+    public void ShowMessage(string message)
+    {
+        StartCoroutine(ShowMessageOnScreen(message));
+    }
+
+    IEnumerator ShowMessageOnScreen(string message)
     {
         messageText.text = message + " [" + SecondsToString() + "]";
         yield return new WaitForSeconds(messageDuration);

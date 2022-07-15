@@ -144,8 +144,11 @@ public class Worker : MonoBehaviour
             }
             if (isPlayer)
             {
-                resourceNode = null;
-                Destroy(resourceNode.gameObject);
+                if (resourceNode)
+                {
+                    Destroy(resourceNode.gameObject);
+                    resourceNode = null;
+                }
             }
         }
     }
@@ -170,13 +173,10 @@ public class Worker : MonoBehaviour
         if (building.baseStats.cost <= ResourceManager.instance.currentResources)
         {
             SpawnBlueprint(building.buildingBlueprintPrefab);
-            StartCoroutine(LogController.instance.ShowMessage($"{building.buildingName} added to the construction queue."));
-
-            ResourceManager.instance.SubtractResource(building.baseStats.cost);
         }
         else
         {
-            StartCoroutine(LogController.instance.ShowMessage("Not enough resources!"));
+            LogController.instance.ShowMessage("Not enough resources!");
         }
     }
 
